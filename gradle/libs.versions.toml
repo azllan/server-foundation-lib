@@ -1,0 +1,17 @@
+[versions]
+apache-commons-math3 = "3.6.1"
+f4b6a3-uuid-creator = "6.1.1"
+guava = "33.4.6-jre"
+jakarta-persistence = "3.2.0"
+junit-jupiter-engine = "5.12.1"
+kotlin = "1.9.25"
+
+[libraries]
+apache-commons-math3 = { module = "org.apache.commons:commons-math3", version.ref = "apache-commons-math3" }
+f4b6a3-uuid-creator = { group = "com.github.f4b6a3", name = "uuid-creator", version.ref = "f4b6a3-uuid-creator" }
+guava = { module = "com.google.guava:guava", version.ref = "guava" }
+jakarta-persistence = { group = "jakarta.persistence", name = "jakarta.persistence-api", version.ref = "jakarta-persistence" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit-jupiter-engine" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
