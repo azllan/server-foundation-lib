@@ -7,8 +7,8 @@ plugins {
     `maven-publish`
 }
 
-group = "org.azllan"
-version = "0.1.0"
+group = getProp("project.group", "org.azllan")
+version = getProp("project.version", "0.1.0")
 
 base {
     archivesName.set("server-foundation")
@@ -27,13 +27,13 @@ publishing {
             artifactId = base.archivesName.get()
 
             pom {
-                name.set("Azllan Server Foundation Library")
-                description.set("Base library for Web Services")
-                url.set("https://github.com/azllan/server-foundation-lib")
+                name.set(getProp("project.name", "Azllan Server Foundation Library"))
+                description.set(getProp("project.description", "Base library for Web Services"))
+                url.set(getProp("project.repository.url", "https://github.com/azllan/server-foundation-lib"))
 
                 organization {
-                    name.set("Azllan")
-                    url.set("https://azllan.org")
+                    name.set(getProp("project.organization.name", "Azllan"))
+                    url.set(getProp("project.organization.url", "https://azllan.org"))
                 }
 
                 developers {
@@ -50,10 +50,10 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/azllan/server-foundation-lib")
+            url = uri(getProp("gpr.repository.url"))
             credentials {
-                username = project.findProperty("gpr.user") as String? ?: System.getenv("GITHUB_USERNAME")
-                password = project.findProperty("gpr.key") as String? ?: System.getenv("GITHUB_TOKEN")
+                username = getProp("gpr.user")
+                password = getProp("gpr.key")
             }
         }
     }
@@ -88,3 +88,7 @@ tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
+
+fun getProp(key: String, default: String = ""): String = project.findProperty(key) as String?
+    ?: System.getenv(key.uppercase().replace(".", "_"))
+    ?: default
